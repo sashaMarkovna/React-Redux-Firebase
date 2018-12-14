@@ -21,3 +21,20 @@ export const createProject = (project) => {
       });
   }
 };
+
+export const deleteProject = (projectId) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        // make async call to database
+        const firestore = getFirestore();
+
+        firestore.collection('projects').doc(projectId)
+            .delete()
+            .then(() => {
+            dispatch({
+                type: 'DELETE_PROJECT',
+            });
+        }).catch((error) => {
+            dispatch({ type: 'DELETE_PROJECT_ERROR', error });
+        });
+    }
+};

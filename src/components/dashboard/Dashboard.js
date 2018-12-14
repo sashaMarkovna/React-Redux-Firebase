@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
-import Notifications from './Notifications';
 import ProjectList from '../projects/ProjectList';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
+import Spinner from "../general/Spinner";
 
 class Dashboard extends Component {
     render() {
-        const { projects, auth, notifications } = this.props;
+        const { projects, auth, notifications, storage, firebase } = this.props;
 
         if (!auth.uid) return <Redirect to='/signin'/>;
 
+        // let message = 'This is my message';
+        // let storageRef = firebase.storage().ref('avatars/newMessage');
+        // storageRef.putString(message).then(function (snapshot) {
+        //    console.log('Uploaded a message');
+        // });
+        // console.log(firebase.storage().ref().child('avatars/team_9.jpg').bucket);
+
+
+        const projectContent = projects ?  <ProjectList projects={ projects }/> : <Spinner/>;
+
         return (
-            <div className="dashboard containerInfo">
+            <div className="dashboard container containerInfo">
                 <div className="row">
-                    <div className="col s12 m6">
-                        <ProjectList projects={ projects }/>
-                    </div>
-                    <div className="col s12 m5 offset-m1">
-                        <Notifications notifications={ notifications }/>
+                    <div>
+                        { projectContent }
                     </div>
                 </div>
             </div>
@@ -31,7 +38,9 @@ const mapStateToProps = (state) => {
     return {
         projects: state.firestore.ordered.projects,
         auth: state.firebase.auth,
-        notifications: state.firestore.ordered.notifications
+        notifications: state.firestore.ordered.notifications,
+        storage: state.firebase.storage,
+        firebase: state.firebase
     }
 };
 

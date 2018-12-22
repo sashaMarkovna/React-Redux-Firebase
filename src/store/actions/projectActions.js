@@ -27,8 +27,7 @@ export const deleteProject = (projectId) => {
         // make async call to database
         const firestore = getFirestore();
 
-        firestore.collection('projects').doc(projectId)
-            .delete()
+        firestore.collection('projects').doc(projectId).delete()
             .then(() => {
             dispatch({
                 type: 'DELETE_PROJECT',

@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { uploadFile } from "../../store/actions/uploadActions";
 import { connect } from 'react-redux';
 import UserPhoto from "../general/UserPhoto";
+import { compose } from "redux";
+import { firestoreConnect } from "react-redux-firebase";
+import PreviewPicture from "../general/PreviewPicture";
 
 
 class ChangeUserPhoto extends Component {
@@ -25,13 +28,12 @@ class ChangeUserPhoto extends Component {
     handleSubmit = (event) => {
       event.preventDefault();
       this.props.uploadFile(this.state[this.state.path]);
-      this.props.history.push('/');
+      this.props.history.push(`/user/${this.props.match.params.id}`);
     };
 
     displayPicture = (event) => {
         const reader = new FileReader();
         const file = event.target.files[0];
-
         reader.onloadend = () => {
             this.setState({
                 [this.state.path]: {
@@ -45,8 +47,6 @@ class ChangeUserPhoto extends Component {
     };
 
     render() {
-        console.log(this.props);
-
         return (
             <div className="container">
                 <form onSubmit={ this.handleSubmit } className="white">
@@ -67,9 +67,9 @@ class ChangeUserPhoto extends Component {
                             />
                         </div>
                     </div>
-                    <UserPhoto pictureUrl={ this.state.pictureUrl } rootComponent={'profile-page-img'}/>
+                    { this.state.path === 'editMyProfilePhoto' ? <UserPhoto pictureUrl={ this.state.pictureUrl } rootComponent={'--edit'}/> : <PreviewPicture pictureUrl={ this.state.pictureUrl }/>}
                     <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
+                        <button className="btn pink lighten-1 z-depth-0">Edit</button>
                     </div>
                 </form>
             </div>
@@ -77,10 +77,19 @@ class ChangeUserPhoto extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        uploadFile: (data) => dispatch(uploadFile(data))
-    }
+const mapStateToProps = (state) => {
+    return { user: state.firestore.ordered.users }
 };
 
-export default connect(null, mapDispatchToProps)(ChangeUserPhoto);
+const mapDispatchToProps = (dispatch) => {
+    return { uploadFile: (data) => dispatch(uploadFile(data)) }
+};
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    firestoreConnect((props) => {
+        return [{
+            collection: 'users',
+            doc: props.match.params.id
+        }];
+    }))(ChangeUserPhoto);

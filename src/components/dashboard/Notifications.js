@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from "moment";
+import Link from "react-router-dom/es/Link";
 
 const Notifications = (props) => {
     const { notifications } = props;
@@ -12,7 +13,7 @@ const Notifications = (props) => {
                        { notifications && notifications.map( notification => {
                            return (
                                <li key={ notification.id }>
-                                   <span className="pink-text">{ notification.user } </span>
+                                   <Link to={`/user/${ notification.userId }`} className="pink-text">{ notification.user } </Link>
                                    <span>{ notification.content }</span>
                                    <div className="grey-text note-date">
                                        { moment(notification.time.toDate()).fromNow() }

@@ -8,17 +8,9 @@ import Spinner from "../general/Spinner";
 
 class Dashboard extends Component {
     render() {
-        const { projects, auth, notifications, storage, firebase } = this.props;
+        const { projects, auth } = this.props;
 
         if (!auth.uid) return <Redirect to='/signin'/>;
-
-        // let message = 'This is my message';
-        // let storageRef = firebase.storage().ref('avatars/newMessage');
-        // storageRef.putString(message).then(function (snapshot) {
-        //    console.log('Uploaded a message');
-        // });
-        // console.log(firebase.storage().ref().child('avatars/team_9.jpg').bucket);
-
 
         const projectContent = projects ?  <ProjectList projects={ projects }/> : <Spinner/>;
 

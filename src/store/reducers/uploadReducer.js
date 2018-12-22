@@ -10,12 +10,16 @@ const uploadReducer = (state = initState, action) => {
                 ...state,
                 uploadError: null
             };
+
         case 'FILE_UPLOAD_ERROR':
             console.log('File Uploading Error', action.error.message);
             return {
                 ...state,
                 uploadError: 'File upload failed'
-            }
+            };
+
+        default:
+            return state;
     }
 };
 

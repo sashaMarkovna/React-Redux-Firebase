@@ -4,14 +4,12 @@ import EditLink from "./EditLink";
 
 const UserPhoto = (props) => {
     const { pictureUrl, rootComponent, auth, userId, linkParams } = props;
-    const picture = pictureUrl ? (<img src={ pictureUrl } className="user-img"></img>) : null;
-    const changePhoto = auth.uid === userId ? <EditLink linkParams={ linkParams }/>: null;
 
     return (
-        <div className="user-photo-block">
-            <div className={ rootComponent }>
-                { picture }
-                { changePhoto }
+        <div className="user-photo">
+            { auth.uid === userId ? <EditLink linkParams={ linkParams }/>: null }
+            <div className={ `user-photo__image-block user-photo__image-block${ rootComponent }` }>
+                { pictureUrl ? (<img src={ pictureUrl } className="user-photo__img" alt=""></img>) : null }
             </div>
         </div>
     );

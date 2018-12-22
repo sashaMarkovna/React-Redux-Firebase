@@ -10,102 +10,150 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("/img/concrete.jpg");
-  background-size: contain;
+  background-image: url("/img/beb86885727964a690027923a2714f3e.png");
+  background-size: cover;
   min-height: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
+code { font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
 
+/*================================================================FORMS===*/
 form {
-  padding: 20px;
-  margin-top: 60px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  max-width: 600px;
+    padding: 20px;
+    margin-top: 60px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    max-width: 600px; }
+
+form button, form h5 { margin: 20px 0; }
+
+.form__radio-block {
+    display: flex;
+    flex-wrap: wrap; }
+
+.form__radio-input-block { margin-right: 30px; }
+
+.dropdown-trigger-input {
+    display: flex;
+    align-items: center;
 }
 
-form button, form h5 {
-  margin: 20px 0;
+.dropdown-trigger-input__button {
+    margin: 0 0 0 10px;
 }
 
-.brand-logo { position: relative; }
+.input-field { margin-bottom: 0; }
+
+.update-success-message {
+    font-size: 10px;
+    color: #26a69a;
+    margin: 0;
+    width: 100%;
+}
+
+.update-error-message {
+    font-size: 10px;
+    color: #ec407a;
+    margin: 0;
+    width: 100%;
+}
+
+/*================================================================HEADER-NAV===*/
+.nav-link {
+    font-family: 'Righteous', cursive;
+    display: flex;
+    align-items: center;
+}
+
+.initials { font-family: 'Righteous', cursive; }
+
+.nav-link:hover { color: #26a69a; }
+.quit-link:hover { color: #ec407a; }
+
+.nav-link--profile-nav {
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+    transition: .2s linear;
+}
+
+.nav-link--profile-nav:hover {
+    color: black;
+    transform: scale(1.2);
+    background-color: transparent;
+}
+
+.brand-logo {
+    position: relative !important;
+    font-family: 'Staatliches', cursive;
+}
 
 .nav-wrapper {
   margin-bottom: 4vh;
 }
 
-.profile-page-img {
+/*================================================================USER-PHOTO===*/
+.user-photo { position: relative; }
+
+.user-photo:hover>.edit-link__user-photo { display: block; }
+
+.user-photo__image-block {
     border-radius: 80px;
-    object-fit: cover;
     background: white;
-    align-items: center;
-    display: flex;
     position: relative;
     box-shadow: rgba(16, 16, 16, 0.6) 7px 5px 2px;
-    transition: .3s linear;
-}
-.profile-page-img:hover {
-    margin-bottom: 7px;
-    box-shadow: rgba(16, 16, 16, 0.8) 20px 20px 10px;
-}
+    overflow: hidden;
+    border: 5px solid white; }
 
-
-
-.user-photo-block:hover>.profile-page-img>.edit-link-profile-photo { display: block; }
-
-.user-img {
-    border-radius: 80px;
+.user-photo__image-block--profile {
     width: 150px;
-    height: 150px;
+    max-height: 150px;
+    min-width: 150px;
+    transition: .3s linear; }
+
+.user-photo__image-block--profile:hover {
+    margin-bottom: 7px;
+    box-shadow: rgba(16, 16, 16, 0.8) 20px 20px 10px; }
+
+.user-photo__image-block--edit {
+    width: 150px;
+    max-height: 150px;
+    min-width: 150px;
+}
+
+.user-photo__img {
+    border-radius: 80px;
+    width: 100%;
+    height: auto;
     min-height: 150px;
     min-width: 150px;
-    border: 4px solid white;
 }
 
+/*================================================================USER-BANNER===*/
 .user-banner {
     display: flex;
     align-items: flex-end;
     box-sizing: border-box;
     padding: 0 30px 10px 0;
     justify-content: flex-end;
-    /*box-shadow: 0 0 30px 0 #000000, 0 -10vh 60px 0 rgba(0, 0, 0, .3) inset;*/
     box-shadow: 24px 18px 2px 0px rgba(0,0,0,0.7), 0 -10vh 60px 0 rgba(0, 0, 0, .5) inset;
     position: relative;
     background-size: cover;
     background-position: center;
     margin-bottom: 30px;
-}
+    height: 34vh; }
 
-.user-banner:hover>.edit-link-profile-banner{ display: block; }
+.user-banner:hover>.edit-link__banner { display: block; }
 
-.user-profile-name {
-    /*font-family: 'Monoton', cursive;*/
-    /*font-family: 'Staatliches', cursive;*/
-    /*font-family: 'Anton', sans-serif;*/
-    /*font-family: 'Abril Fatface', cursive;*/
+.user-banner__name-block {
     user-select: none;
     font-family: 'Righteous', cursive;
     font-size: 30px;
     color: ghostwhite;
-    text-shadow: 4px -4px rgba(157, 217, 227, .7), -2px -2px rgba(159, 141, 105, .7), 0 2px rgba(254, 216, 21, .7);
-    /*text-shadow: 1px 1px #F3E7CF, -1px -1px #56433D;*/
-    /*text-shadow: 2px 2px black, 4px 4px white, 6px 6px black, 8px 8px white, 10px 10px black;*/
-}
+    text-shadow: 4px -4px rgba(157, 217, 227, .7), -2px -2px rgba(159, 141, 105, .7), 0 2px rgba(254, 216, 21, .7); }
 
-.select-user-photo {
-    width: 200px;
-    height: 200px;
-    border-radius: 80px;
-    border: 4px solid white;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
 
+/*================================================================EDIT-LINKS===*/
 .edit-link {
     height: 20px;
     width: 30px;
@@ -113,17 +161,13 @@ form button, form h5 {
     display: none;
 }
 
-.edit-link-profile-banner {
-    top: 2vh;
-}
+.edit-link__banner { top: 2vh; }
 
-.edit-link-profile-photo {
+.edit-link__user-photo {
     bottom: 0;
-    right: 0;
-}
+    right: 0; }
 
-
-.edit-photo-link {
+.edit-link__img {
     background-image: url(/img/iconfinder_icon-camera_211634.svg);
     background-size: cover;
     background-position: center;
@@ -132,6 +176,95 @@ form button, form h5 {
     height: 100%;
     box-shadow: 0px 0px 5px 3px white;
     background-color: lightcyan;
-    border-radius: 3px;
+    border-radius: 3px; }
+
+/*================================================================MESSAGES===*/
+
+/*===============MESSAGE-ICON===*/
+.message-icon { position: relative; }
+
+.link-icon {
+    height: 100%;
+    margin-right: 10px;
 }
+.message-icon__notification {
+    position: absolute;
+    top: 12px;
+    margin: 0;
+    padding: 0;
+    font-size: 25px;
+    left: 8px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    font-family: 'Abril Fatface', cursive;
+}
+
+
+/*================================================================USER_NAV===*/
+.user-nav {
+    display: flex;
+    justify-content: center;
+}
+
+/*================================================================SETTINGS===*/
+.settings__credentials-block {
+    padding: 30px !important;
+}
+
+.settings__credentials-block>form{
+    padding: 0;
+    margin-top: 0;
+}
+
+.settings__headline {
+    margin-bottom: 50px;
+}
+
+
+
+/*================================================================DELETE_ACCOUNT===*/
+
+.delete-user__form-button-block>form {
+    margin: 0 auto 0 auto;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 80%;
+}
+
+.delete-user-container {
+    width: 40vw;
+    min-width: 290px;
+    padding-bottom: 50px;
+    box-shadow: 24px 18px 2px 0px rgba(0,0,0,0.7)
+}
+
+.delete-user-block {
+    padding: 30px 30px 0 30px;
+    width: 25vw;
+    background: white;
+    min-width: 280px;
+}
+
+.delete-user-block>h2 {
+    margin: 0;
+}
+
+.delete-user-block>h3 {
+    font-size: 25px;
+    text-align: center;
+    font-weight: 400;
+    font-family: 'Righteous', cursive;
+}
+
+.delete-user__img {
+
+}
+
+.delete-user__button {
+    margin: 10px;
+    font-family: "Righteous", cursive;
+    width: 167.23px;
+}
+
 

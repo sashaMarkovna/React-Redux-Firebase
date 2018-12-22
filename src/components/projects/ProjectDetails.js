@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import moment from "moment";
 import { deleteProject } from "../../store/actions/projectActions";
 
@@ -15,7 +15,7 @@ class ProjectDetails extends Component {
     };
 
     render() {
-        const {project, auth} = this.props;
+        const { project, auth } = this.props;
 
         if (!auth.uid) return <Redirect to='/signin'/>;
 
@@ -28,11 +28,9 @@ class ProjectDetails extends Component {
                             <p>{ project.content }</p>
                         </div>
                         <div className="card-action grey lighten-4 grey-text">
-                            <div>Posted by { project.authorFirstName } { project.authorLastName }</div>
+                            <div>Posted by <Link to={`/user/${ project.authorId }`}>{ project.authorFirstName } { project.authorLastName }</Link></div>
                             <div>{ moment(project.createdAt.toDate()).calendar() }</div>
-                            <div>
-                                <a href="#" className="red-text" onClick={ this.handleClick }>Delete</a>
-                            </div>
+                            { auth.uid === project.authorId ? <div><a href="#" className="red-text" onClick={ this.handleClick }>Delete</a></div> : null }
                         </div>
                     </div>
                 </div>

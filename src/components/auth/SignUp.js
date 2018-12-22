@@ -2,20 +2,26 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/actions/authActions";
-import FileInput from "../general/FileInput";
 
 class SignUp extends Component {
     state = {
         email: '',
         password: '',
         firstName: '',
-        lastName: ''
+        lastName: '',
+        gender: ''
     };
 
     handleChange = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value
-        })
+        if(e.target.name === 'gender') {
+            this.setState({
+                [e.target.name]: e.target.value
+            });
+        } else {
+            this.setState({
+                [e.target.id]: e.target.value
+            });
+        }
     };
 
     handleSubmit = (e) => {
@@ -25,11 +31,13 @@ class SignUp extends Component {
 
     render() {
         const { auth, authError } = this.props;
-        if (auth.uid) return <Redirect to='/'/>
+
+        if (auth.uid) return <Redirect to='/'/>;
+
         return (
-            <div className="container">
+            <div className="container form">
                 <form onSubmit={this.handleSubmit} className="white">
-                    <h5 className="grey-text text-darken-3">Sign Up</h5>
+                    <h5 className="grey-text text-darken-3 form__headline">Sign Up</h5>
                     <div className="input-field">
                         <label htmlFor="firstName">First Name</label>
                         <input
@@ -62,7 +70,44 @@ class SignUp extends Component {
                             onChange={this.handleChange}
                         />
                     </div>
-                    <FileInput label="Edit Photo"/>
+                    <div className="form__radio-block">
+                        <div className="form__radio-input-block">
+                            <label>
+                                <input
+                                    className="with-gap"
+                                    name="gender"
+                                    type="radio"
+                                    value="male"
+                                    onChange={this.handleChange}
+                                />
+                                <span>Male</span>
+                            </label>
+                        </div>
+                        <div className="radio-block">
+                            <label>
+                                <input
+                                    className="with-gap"
+                                    name="gender"
+                                    type="radio"
+                                    value="female"
+                                    onChange={this.handleChange}
+                                />
+                                <span>Female</span>
+                            </label>
+                        </div>
+                        <div className="radio-block">
+                            <label>
+                                <input
+                                    className="with-gap"
+                                    name="gender"
+                                    type="radio"
+                                    value="unknown"
+                                    onChange={this.handleChange}
+                                />
+                                <span>I'm not sure...</span>
+                            </label>
+                        </div>
+                    </div>
                     <div className="input-field">
                         <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
                         <div className="red-text center">
@@ -85,7 +130,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         signUp: (newUser) => dispatch(signUp(newUser))
-
     }
 };
 

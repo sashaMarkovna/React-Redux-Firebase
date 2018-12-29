@@ -21,7 +21,7 @@ const Comments = (props) => {
                 : isEmpty(comments) || !comments.length
                 ? (<p className="comments__no-comments">No talks yet, be first...</p>)
                 : comments.map(comment => {
-                return ( <Comment comment={ comment } key={comment.id}/> )})
+                return ( <Comment id={ props.id } uid={ props.uid } comment={ comment } key={comment.id}/> )})
             }
         </div>
     )

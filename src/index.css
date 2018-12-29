@@ -609,11 +609,33 @@ form button, form h5 { margin: 20px 0; }
     border-bottom: 1px solid lightgray;
 }
 
+.comment__author-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
 .comment__content {
     margin-top: 15px;
     font-size: 14px;
     /*font-family: 'Kalam', cursive;*/
     font-family: 'Shadows Into Light Two', cursive;
     letter-spacing: 1.6px;
+}
+
+.comment__delete {
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Architects Daughter', cursive;
+    display: none;
+    user-select: none;
+}
+
+.comment__delete:hover {
+    color: #ec407a;
+}
+
+.comment:hover .comment__delete {
+    display: block;
 }
 

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
 import FileInput from "../general/FileInput";
-import {cleanProjectState, createProject, updateProject} from "../../store/actions/projectActions";
-import {cleanUploadState, deleteFile, uploadFileAndReturnUrl} from "../../store/actions/uploadActions";
-import {compose} from "redux";
-import {firestoreConnect} from "react-redux-firebase";
+import { cleanProjectState, createProject, updateProject } from "../../store/actions/projectActions";
+import { cleanUploadState, deleteFile, uploadFileAndReturnUrl } from "../../store/actions/uploadActions";
+import { compose } from "redux";
+import { firestoreConnect } from "react-redux-firebase";
 import autosize from 'autosize';
 
 class CreateProject extends Component {

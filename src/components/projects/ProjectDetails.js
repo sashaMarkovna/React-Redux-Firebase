@@ -10,14 +10,16 @@ import ReactTooltip from 'react-tooltip'
 import { deleteFile } from "../../store/actions/uploadActions";
 import Comments from "./Comments";
 import UserSignature from "../users/UserSignature";
+import {deleteAllComments} from "../../store/actions/commentsActions";
 
 
 class ProjectDetails extends Component {
 
-    handleClick = (e) => {
+    handleDelete = (e) => {
         e.preventDefault();
         if(this.props.project.headlineBanner) { this.props.deleteFile(this.props.project.headlineBanner) }
         this.props.deleteProject(this.props.id);
+        this.props.deleteAllComments(this.props.id);
         this.props.history.push('/');
     };
 
@@ -48,7 +50,7 @@ class ProjectDetails extends Component {
                                                 <ReactTooltip effect="solid"/>
                                             </Link>
                                         </div>
-                                        <div className="delete-post" id="deletePost" onClick={ this.handleClick }>
+                                        <div className="delete-post" id="deletePost" onClick={ this.handleDelete }>
                                             <i
                                                 className="fas fa-trash-alt"
                                                 onMouseOver={() => { ReactTooltip.show(findDOMNode(this.refs.foo)) }}
@@ -65,7 +67,7 @@ class ProjectDetails extends Component {
 
                             <div className="project-details__content">{ project.content.split('\n').map((item, key) => { return <span key={key}>{item}<br/></span> }) }</div>
                         </div>
-                        <Comments id={ id }/>
+                        <Comments id={ id } uid={ auth.uid }/>
                     </div>
                 </div>
             )
@@ -95,6 +97,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         deleteProject: (projectId) => dispatch(deleteProject(projectId)),
         deleteFile: (fileUrl) => dispatch(deleteFile(fileUrl)),
+        deleteAllComments: (projectId) => dispatch(deleteAllComments(projectId))
     }
 };
 

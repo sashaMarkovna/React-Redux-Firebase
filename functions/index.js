@@ -2,11 +2,6 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
-
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Sasha!");
-// });
-
 const createNotification = ( (notification) => {
    return admin.firestore()
        .collection('notifications')
@@ -19,12 +14,13 @@ exports.projectCreated = functions.firestore
     .onCreate( doc => {
         const project = doc.data();
         const notification = {
-            content: 'Added a new project',
-            user: `${project.authorFirstName} ${project.authorLastName}`,
+            action: 'added a new',
+            content: 'post',
+            user: project.author,
             userId: project.authorId,
+            projectId: doc.id,
             time: admin.firestore.FieldValue.serverTimestamp()
         };
-
         return createNotification(notification);
 });
 
@@ -37,8 +33,9 @@ exports.userJoined = functions.auth
             .then( doc => {
                 const newUser = doc.data();
                 const notification = {
-                    content: 'Joined the party',
-                    user: `${newUser.firstName} ${newUser.lastName}`,
+                    action: 'joined the',
+                    content: 'party',
+                    user: `${ newUser.firstName } ${ newUser.lastName }`,
                     userId: user.uid,
                     time: admin.firestore.FieldValue.serverTimestamp()
                 };

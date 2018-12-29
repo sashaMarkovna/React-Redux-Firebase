@@ -1,32 +1,62 @@
 // In case we don't have data
 const initState = {
-    projects: [
-        {id: '1', title: 'help me find peach', content: 'bla bla bla bla'},
-        {id: '2', title: 'collect all the stars', content: 'bla bla bla bla bla bla'},
-        {id: '3', title: 'egg hunt with Yoshi', content: 'bla bla bla bla bla'},
-        {id: '4', title: 'bring some fun', content: 'bla bla bla'}
-    ]
+    projectError: null,
+    projectSuccess: null
 };
 
 const projectReducer = (state = initState, action) => {
 
     switch (action.type) {
 
-        case 'CREATE_PROJECT':
-            console.log('Created project', action.project);
-            return state;
+        case 'CLEAN_STATE_SUCCESS':
+            return {
+                ...state,
+                projectError: null,
+                projectSuccess: null
+            };
+
+        case 'CREATE_PROJECT_SUCCESS':
+            console.log('Created project', action.project.id);
+            return {
+                ...state,
+                projectError: null
+            };
 
         case 'CREATE_PROJECT_ERROR':
             console.log('create project error ', action.error.message);
-            return state;
+            return {
+                ...state,
+                projectError: action.error.message
+            };
 
-        case 'DELETE_PROJECT':
+        case 'DELETE_PROJECT_SUCCESS':
             console.log('Project deleted');
-            return state;
+            return {
+                ...state,
+                projectError: null,
+                projectSuccess: true
+            };
 
         case 'DELETE_PROJECT_ERROR':
             console.log('Delete project error', action.error.message);
-            return state;
+            return {
+                ...state,
+                projectError: action.error.message
+            };
+
+        case 'PROJECT_UPDATE_SUCCESS':
+            console.log('Project was successfully updated', action.project);
+            return {
+                ...state,
+                projectError: null
+            };
+
+        case 'PROJECT_UPDATE_ERROR':
+            console.log('Project update error', action.error.message);
+            return {
+                ...state,
+                projectError: action.error.message
+            };
 
         default:
             return state;

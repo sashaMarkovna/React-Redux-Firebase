@@ -2,7 +2,11 @@ import React from 'react';
 import Loader from 'react-loader-spinner';
 
 const Spinner = () => {
-    return (<Loader type="Ball-Triangle" color="#00BFFF" height={80} width={80} />)
+    return (
+        <div className="spinner">
+            <Loader type="Ball-Triangle" color="#26a69a" height={150} width={150} />
+        </div>
+    )
 };
 
 export default Spinner;

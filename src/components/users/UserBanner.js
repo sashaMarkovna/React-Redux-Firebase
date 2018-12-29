@@ -2,6 +2,7 @@ import React from 'react';
 import UserPhoto from "../general/UserPhoto";
 import { connect } from 'react-redux';
 import EditLink from "../general/EditLink";
+import UserNavbar from "./UserNavbar";
 
 const UserBanner = (props) => {
 
@@ -19,17 +20,20 @@ const UserBanner = (props) => {
     };
 
     return (
-        <div className="user-banner" style={{ backgroundImage: `url(${ user.profileBanner })`}}>
-            { auth.uid === user.id ? <EditLink linkParams={ editBannerLink }/>: null }
-            <div className="user-banner__name-block">
-                <h4 className="user-banner__name">{ `${ user.firstName } ${ user.lastName }` }</h4>
+        <div className="user-banner">
+            <div className="user-banner__banner-block" style={{ backgroundImage: `url(${ user.profileBanner })`}}>
+                { auth.uid === user.id ? <EditLink linkParams={ editBannerLink }/>: null }
+                <div className="user-banner__name-block">
+                    <h4 className="user-banner__name">{ `${ user.firstName } ${ user.lastName }` }</h4>
+                </div>
+                <UserPhoto
+                    pictureUrl={ user.userPhoto }
+                    rootComponent={'--profile'}
+                    userId={ user.id }
+                    linkParams={ editPhotolink }
+                />
             </div>
-            <UserPhoto
-                pictureUrl={ user.userPhoto }
-                rootComponent={'--profile'}
-                userId={ user.id }
-                linkParams={ editPhotolink }
-            />
+            { auth.uid === user.id ? <UserNavbar/> : null }
         </div>
     )
 };

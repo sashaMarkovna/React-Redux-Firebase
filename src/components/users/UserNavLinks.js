@@ -8,19 +8,19 @@ const UserNavLinks = (props) => {
     return (
         <ul>
             <li>
-                <NavLink to="/create" className="nav-link nav-link--profile-nav">
-                    <i className="fas fa-pencil-alt link-icon" style={{fontSize: '20px'}}></i>
+                <NavLink to="/create/post" className="nav-link nav-link--profile-nav">
+                    <i className="fas fa-pencil-alt link-icon" style={{fontSize: '20px'}}/>
                     New Post
                 </NavLink></li>
             <li>
                 <NavLink to={'/user/' + props.userId} className="nav-link nav-link--profile-nav">
-                    <i className="far fa-comment link-icon"></i>
+                    <i className="far fa-comment link-icon"/>
                     Messages
                 </NavLink>
             </li>
             <li>
                 <NavLink to={`/user/${props.userId}/settings`} className="nav-link nav-link--profile-nav">
-                    <i className="fas fa-cogs link-icon"></i>
+                    <i className="fas fa-cogs link-icon"/>
                     Settings
                 </NavLink>
             </li>

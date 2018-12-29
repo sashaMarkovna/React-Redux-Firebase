@@ -3,13 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "autosize": "^4.0.2",
     "firebase": "^5.6.0",
     "moment": "^2.22.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-loader-spinner": "^2.3.0",
+    "react-mason": "^1.1.2",
+    "react-masonry-component": "^6.2.1",
     "react-redux": "^5.1.1",
     "react-scripts": "2.1.1",
+    "react-tooltip": "^3.9.0",
     "redux": "^4.0.1",
     "redux-firestore": "^0.6.0",
     "redux-thunk": "^2.3.0"
@@ -31,6 +35,7 @@
   ],
   "devDependencies": {
     "react-redux-firebase": "^2.2.4",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "redux-devtools-extension": "^2.13.7"
   }
 }

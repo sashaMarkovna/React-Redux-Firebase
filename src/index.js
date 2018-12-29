@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import rootReducer from "./store/reducers/rootReducer";
 // Helps to bind Redux with React app
 import { Provider } from 'react-redux';
@@ -11,10 +11,11 @@ import thunk from 'redux-thunk';
 import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import firebaseApp from './config/fbConfig';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 
 const store = createStore(rootReducer,
-    compose(
+    composeWithDevTools(
         applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
         reduxFirestore(firebaseApp),
         reactReduxFirebase(firebaseApp, { useFirestoreForProfile: true, userProfile: 'users', attachAuthIsReady: true })       //to wait until the firebase auth check is ready

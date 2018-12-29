@@ -48,7 +48,7 @@ export const signUp = (newUser) => {
           femaleUserAvatar: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/avatars%2Fdefault-female.jpg?alt=media&token=0d8be347-7b0d-469f-8e2c-3b37ab9a07e2',
           maleUserAvatar: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/avatars%2Fdefault-male.jpg?alt=media&token=e7a72ca8-b8a3-413c-8bd3-5db88c249e74',
           unknownUserAvatar: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/avatars%2Fdefault-unknown.png?alt=media&token=0263a863-c71c-4ef5-a5ef-d016bedbdbd3',
-          defaultBanner: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/banners%2Fdefault-banner.jpg?alt=media&token=508b0c4d-00a3-48cc-b7b2-521bf4eceb93'
+          defaultBanner: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/banners%2Fdefault-banner.jpg?alt=media&token=7800dafd-ccd2-4ed5-b341-08bb7270f8d0'
         };
         let userPhoto = '';
 
@@ -77,7 +77,7 @@ export const changeUserEmailOrPassword = (newCredentials) => {
   return (dispatch, getState, { getFirebase }) => {
       const firebase = getFirebase();
       const currentUser = firebase.auth().currentUser;
-      const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, newCredentials.password)
+      const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, newCredentials.password);
 
       if(newCredentials.update === 'email') {
           currentUser.reauthenticateAndRetrieveDataWithCredential(cred)
@@ -103,12 +103,12 @@ export const deleteUserAccount = (password) => {
         const currentUser = firebase.auth().currentUser;
         const uid = currentUser.uid;
         const profile = getState().firebase.profile;
-        const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, password)
+        const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, password);
         const userDefaultSettings = {
             femaleUserAvatar: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/avatars%2Fdefault-female.jpg?alt=media&token=0d8be347-7b0d-469f-8e2c-3b37ab9a07e2',
             maleUserAvatar: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/avatars%2Fdefault-male.jpg?alt=media&token=e7a72ca8-b8a3-413c-8bd3-5db88c249e74',
             unknownUserAvatar: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/avatars%2Fdefault-unknown.png?alt=media&token=0263a863-c71c-4ef5-a5ef-d016bedbdbd3',
-            defaultBanner: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/banners%2Fdefault-banner.jpg?alt=media&token=508b0c4d-00a3-48cc-b7b2-521bf4eceb93'
+            defaultBanner: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/banners%2Fdefault-banner.jpg?alt=media&token=7800dafd-ccd2-4ed5-b341-08bb7270f8d0'
         };
         const userAvatar = profile.userPhoto !== userDefaultSettings.femaleUserAvatar &&
                            profile.userPhoto !== userDefaultSettings.maleUserAvatar &&

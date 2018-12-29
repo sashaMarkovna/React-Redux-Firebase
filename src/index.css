@@ -2,6 +2,31 @@ html {
   min-height: 100%;
 }
 
+/*fonts*/
+/*font-family: 'Quicksand', sans-serif; */
+/*font-family: 'Fjalla One', sans-serif; */
+/*font-family: 'Permanent Marker', cursive; */
+/*font-family: 'Bangers', cursive; */
+/*font-family: 'Yellowtail', cursive;*/
+/*font-family: 'Abril Fatface', cursive;*/
+/*font-family: 'Julius Sans One', sans-serif;*/
+/*font-family: 'Nixie One', cursive;*/
+/*font-family: 'Poiret One', cursive;*/
+
+
+.masonry {
+    margin: auto;
+    padding: auto;
+}
+.gridSizer,
+.grid-item {
+    width: 33.333%;
+    margin: 0;
+}
+.grid {
+    margin: 0 auto;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -58,6 +83,12 @@ form button, form h5 { margin: 20px 0; }
     width: 100%;
 }
 
+.spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /*================================================================HEADER-NAV===*/
 .nav-link {
     font-family: 'Righteous', cursive;
@@ -75,6 +106,7 @@ form button, form h5 { margin: 20px 0; }
     font-size: 16px;
     font-weight: 400;
     transition: .2s linear;
+    font-family: 'Permanent Marker', cursive;
 }
 
 .nav-link--profile-nav:hover {
@@ -130,17 +162,17 @@ form button, form h5 { margin: 20px 0; }
 }
 
 /*================================================================USER-BANNER===*/
-.user-banner {
+.user-banner { box-shadow: 24px 18px 2px 0px rgba(0,0,0,0.7); }
+.user-banner__banner-block {
     display: flex;
     align-items: flex-end;
     box-sizing: border-box;
     padding: 0 30px 10px 0;
     justify-content: flex-end;
-    box-shadow: 24px 18px 2px 0px rgba(0,0,0,0.7), 0 -10vh 60px 0 rgba(0, 0, 0, .5) inset;
+    box-shadow: 0 -10vh 60px 0 rgba(0, 0, 0, .5) inset;
     position: relative;
     background-size: cover;
     background-position: center;
-    margin-bottom: 30px;
     height: 34vh; }
 
 .user-banner:hover>.edit-link__banner { display: block; }
@@ -203,8 +235,7 @@ form button, form h5 { margin: 20px 0; }
 
 /*================================================================USER_NAV===*/
 .user-nav {
-    display: flex;
-    justify-content: center;
+
 }
 
 /*================================================================SETTINGS===*/
@@ -224,7 +255,6 @@ form button, form h5 { margin: 20px 0; }
 
 
 /*================================================================DELETE_ACCOUNT===*/
-
 .delete-user__form-button-block>form {
     margin: 0 auto 0 auto;
     padding-top: 0;
@@ -267,4 +297,324 @@ form button, form h5 { margin: 20px 0; }
     width: 167.23px;
 }
 
+/*================================================================NOTIFICATIONS===*/
+.notifications {
+    box-shadow: 24px 18px 2px 0px rgba(0,0,0,0.7)
+}
+
+.notifications__content-link {
+    color: #26a69a;
+}
+
+/*================================================================PROJECTS===*/
+/*--------------------------PROJECT-DETAILS------->*/
+.project-details {
+    box-shadow: 24px 18px 2px 0px rgba(0,0,0,0.7) !important;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto; }
+
+.project-details__main {
+    font-family: 'Poiret One', cursive;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 18px;
+    line-height: 30px; }
+
+.project-details__title {
+    font-family: 'Staatliches', cursive;
+    margin: 0 !important; }
+
+.edit-post-links {
+    font-size: 20px;
+    display: flex;
+    color: #9e9e9e;
+}
+
+.project-details__author-block {
+    display: flex;
+    justify-content: space-between; }
+
+.delete-post {
+    margin-left: 10px;
+    margin-right: 10px; }
+
+.edit-post-links div>i {
+    cursor: pointer;
+    transition: .2s linear; }
+
+.edit-post-links div>i:hover,
+.edit-post__editLink>i:hover {
+    transform: scale(1.4) !important; }
+
+.edit-post-links div>.fa-trash-alt:hover { color: #ec407a; }
+
+.edit-post__editLink>i {
+    color: #9e9e9e;
+    height: max-content;
+    transition: .2s linear }
+
+.edit-post__editLink>i:hover { color: #26a69a; }
+
+.project-details__edit-post {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0 10px 0;
+}
+
+.project-details__content {
+    margin-top: 30px;
+}
+/*--------------------------CREATE-PROJECT------->*/
+.create-project {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 700px;
+    margin-bottom: 50px;
+}
+
+.create-project__form-title {
+    font-family: 'Bangers', cursive;
+    font-size: 30px;
+}
+
+.create-project__content-input {
+    white-space: pre-line;
+    font-family: "Poiret One", cursive;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 18px !important;
+    line-height: 30px !important;
+}
+
+.create-project__title {
+    font-family: 'Staatliches', cursive;
+    font-size: 24px !important;
+}
+
+.add-file__inputs {
+    width: 35px;
+    height: 35px !important;
+    margin: 0;
+}
+
+.add-file {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.add-file__button {
+    width: 35px;
+    height: 35px !important;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 20px;
+    color: #26a69a;
+    box-shadow: none !important;
+    display: flex;
+    align-items: center;
+}
+
+.add-file__add-icon {
+    font-size: 30px !important;
+}
+
+.add-file__delete-icon {
+    margin-left: 20px;
+    font-size: 35px !important;
+    color: #bdbdbd;
+}
+
+.add-file__cancel-icon {
+    margin-left: 20px;
+    font-size: 27px !important;
+    color: #ffd600 ;
+}
+
+.add-file__button:hover {
+    background-color: transparent !important;
+}
+
+.add-file__label {
+    font-family: 'Righteous', cursive;
+    margin-left: 10px;
+    color: #26a69a;
+    opacity: 0.6;
+}
+
+.create-project__btn-block {
+    display: flex;
+    justify-content: space-between;
+}
+
+/*--------------------------PROJECT-SUMMARY------->*/
+.project-summary {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 24px 18px 2px 0px rgba(0,0,0,0.7) !important;
+    /*margin-bottom: 50px;*/
+    font-family: 'Righteous', cursive;
+    position: relative;
+}
+
+.project-summary__title {
+    font-family: 'Staatliches', cursive;
+    margin: 5% 0 5% 0;
+}
+
+.project-summary__banner {
+
+}
+
+.project-summary__content {
+    padding: 4% !important;
+}
+
+
+
+/*================================================================USER-SIGNATURE===*/
+.user-signature {
+    display: flex;
+    align-items: center;
+}
+
+.user-photo {
+    overflow: hidden;
+    border-radius: 50px;
+    margin-right: 10px;
+}
+
+.user-photo--project-author {
+    width: 60px;
+    height: 60px;
+}
+
+.user-photo--comment {
+    width: 45px;
+    height: 45px;
+}
+
+.user-signature__timestamp {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 100;
+}
+
+.user-signature__timestamp--comment {
+    font-size: 12px;
+}
+
+.user-signature__timestamp--project-author {
+    font-size: 14px;
+}
+
+.user-signature__name {
+    font-size: 16px;
+}
+
+.user-link {
+    color: black !important;
+    /*letter-spacing: 1px;*/
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: 'Poiret One', cursive;
+    /*font-family: 'Righteous', cursive;*/
+    text-shadow: -2px -2px rgba(38, 166, 154, .2);
+}
+
+.user-signature__name--comment {
+    font-size: 13px;
+}
+
+/*================================================================TOOLTIPS===*/
+.delete-tooltip {
+    background-color: #ec407a !important;
+    font-weight: 600;
+    transition: .2s linear !important;
+}
+
+.delete-tooltip::after {
+    border-top-color: #ec407a !important
+}
+
+.edit-tooltip {
+    background-color: #26a69a !important;
+    font-weight: 600;
+    transition: .2s linear !important;
+}
+
+.edit-tooltip::after {
+    border-top-color: #26a69a !important
+}
+
+/*================================================================COMMENTS===*/
+.comments {
+    padding: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.comments__no-comments {
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 1.6px;
+    font-family: 'Poiret One', cursive;
+    font-weight: 600;
+}
+
+.comments__headline {
+    margin: 0;
+    font-size: 20px;
+    font-family: 'Shadows Into Light Two', cursive;
+}
+
+.comments__list {
+    margin: 15px 0 0 0;
+}
+
+.create-comment {
+    margin-top: 15px;
+}
+
+.create-comment__form {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 3% 0 3%;
+}
+
+.create-comment__label {
+    font-family: 'Shadows Into Light Two', cursive;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.create-comment__btn-block {
+    margin: 0;
+}
+
+.create-comment__btn {
+    margin: 0;
+}
+
+.comment {
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    border-bottom: 1px solid lightgray;
+}
+
+.comment__content {
+    margin-top: 15px;
+    font-size: 14px;
+    /*font-family: 'Kalam', cursive;*/
+    font-family: 'Shadows Into Light Two', cursive;
+    letter-spacing: 1.6px;
+}
 

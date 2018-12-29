@@ -6,7 +6,6 @@ import { Redirect } from "react-router-dom";
 import ProjectList from "../projects/ProjectList";
 import Notifications from "../dashboard/Notifications";
 import UserBanner from "./UserBanner";
-import UserNavbar from "./UserNavbar";
 
 class UserProfile extends Component {
     render() {
@@ -19,7 +18,6 @@ class UserProfile extends Component {
         return (
             <div className="container">
                 { user ? <UserBanner user={ user }/> : null }
-                { auth.uid === id ? <UserNavbar/> : null }
                 <div className="row">
                     <div className="col s12 m6">
                         { userProjects ? <ProjectList projects={ userProjects }/> : null }

@@ -54,7 +54,6 @@ class ChangeEmailForm extends Component {
             this.setState({ messageSuccess: this.props.authEmailUpdateSuccessMessage });
         } else if(this.props.authEmailUpdateEmailError !== prevProps.authEmailUpdateEmailError && this.props.authEmailUpdateEmailError) {
             this.setState({ messageEmailError: this.props.authEmailUpdateEmailError });
-
         } else if(this.props.authEmailUpdatePasswordError !== prevProps.authEmailUpdatePasswordError && this.props.authEmailUpdatePasswordError) {
             this.setState({ messagePasswordError: this.props.authEmailUpdatePasswordError });
         }

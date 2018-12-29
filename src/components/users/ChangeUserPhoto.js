@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { uploadFile } from "../../store/actions/uploadActions";
+import { fileUpdate } from "../../store/actions/uploadActions";
 import { connect } from 'react-redux';
 import UserPhoto from "../general/UserPhoto";
 import { compose } from "redux";
@@ -9,7 +9,7 @@ import PreviewPicture from "../general/PreviewPicture";
 
 class ChangeUserPhoto extends Component {
     state = {
-        path: this.props.match.params.fileAction,
+        path: this.props.match.params.filePath,
         pictureUrl: '',
         editMyProfilePhoto: {
             location: 'avatars',
@@ -27,7 +27,7 @@ class ChangeUserPhoto extends Component {
 
     handleSubmit = (event) => {
       event.preventDefault();
-      this.props.uploadFile(this.state[this.state.path]);
+      this.props.fileUpdate(this.state[this.state.path]);
       this.props.history.push(`/user/${this.props.match.params.id}`);
     };
 
@@ -40,7 +40,7 @@ class ChangeUserPhoto extends Component {
                     ...this.state[this.state.path],
                     file: file
                 },
-                pictureUrl: reader.result
+                imgUrl: reader.result
             })
         };
         reader.readAsDataURL(file);
@@ -51,20 +51,22 @@ class ChangeUserPhoto extends Component {
             <div className="container">
                 <form onSubmit={ this.handleSubmit } className="white">
                     <h5 className="grey-text text-darken-3">Surprise us!</h5>
-                    <div className="file-field input-field">
-                        <div className="btn">
-                            <span>File</span>
-                            <input
-                                type="file"
-                                onChange={ this.displayPicture }
-                            />
-                        </div>
-                        <div className="file-path-wrapper">
-                            <input
-                                className="file-path validate"
-                                type="text"
-                                placeholder="Choose file"
-                            />
+                    <div>
+                        <div className="file-field input-field">
+                            <div className="btn">
+                                <span>File</span>
+                                <input
+                                    type="file"
+                                    onChange={ this.displayPicture }
+                                />
+                            </div>
+                            <div className="file-path-wrapper">
+                                <input
+                                    className="file-path validate"
+                                    type="text"
+                                    placeholder="Choose file"
+                                />
+                            </div>
                         </div>
                     </div>
                     { this.state.path === 'editMyProfilePhoto' ? <UserPhoto pictureUrl={ this.state.pictureUrl } rootComponent={'--edit'}/> : <PreviewPicture pictureUrl={ this.state.pictureUrl }/>}
@@ -82,7 +84,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return { uploadFile: (data) => dispatch(uploadFile(data)) }
+    return { fileUpdate: (data) => dispatch(fileUpdate(data)) }
 };
 
 export default compose(

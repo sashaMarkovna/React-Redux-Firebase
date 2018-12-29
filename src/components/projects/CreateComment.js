@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import UserSignature from "../users/UserSignature";
+import {createComment} from "../../store/actions/commentsActions";
 
 class CreateComment extends Component {
 
-    state = {
-        authorId: '',
-        authorName: '',
-        content: ''
-    };
+    state = { content: '' };
 
     handleChange = (e) => {
         this.setState({
@@ -16,13 +13,20 @@ class CreateComment extends Component {
         });
     };
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.createComment(this.props.id, this.state.content);
+        document.getElementById('content').value = '';
+        document.getElementById('createCommentLabel').classList.remove('active');
+    };
+
     render() {
         return (
             <div className="create-comment">
                 <UserSignature authorProps={{ authorId: this.props.uid, componentClass: 'comment' }} />
-                <form className="create-comment__form">
+                <form onSubmit={this.handleSubmit} className="create-comment__form">
                     <div className="input-field">
-                        <label htmlFor="content" className="create-comment__label">...what do you think?</label>
+                        <label htmlFor="content" className="create-comment__label" id="createCommentLabel">...what do you think?</label>
                         <textarea
                             className="materialize-textarea create-comment__content"
                             id="content"
@@ -39,10 +43,17 @@ class CreateComment extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+    console.log('props = ', ownProps.id);
     return {
         uid: state.firebase.auth.uid
     }
 };
 
-export default connect(mapStateToProps)(CreateComment);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createComment: (projectId, content) => dispatch(createComment(projectId, content))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateComment);

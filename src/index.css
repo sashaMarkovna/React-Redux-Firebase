@@ -606,7 +606,6 @@ form button, form h5 { margin: 20px 0; }
 .comment {
     padding: 20px;
     box-sizing: border-box;
-    margin-bottom: 20px;
     border-bottom: 1px solid lightgray;
 }
 

@@ -14,7 +14,7 @@ const Comments = (props) => {
     return (
         <div className="comments grey lighten-4">
             <h3 className="comments__headline">People talk...</h3>
-            <CreateComment/>
+            <CreateComment id={ props.id }/>
             {
                 !isLoaded(comments)
                 ? <Spinner/>

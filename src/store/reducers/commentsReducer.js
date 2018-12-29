@@ -1,16 +1,21 @@
 const initState = {
     commentError: null,
-    comments: null
 };
 
 const commentReducer = (state = initState, action) => {
     switch(action.type) {
-        case 'CLEAN_COMMENTS_SUCCESS':
-            console.log(state.comments);
+        case 'CREATE_COMMENT_SUCCESS':
+            console.log('New comment was created');
             return {
                 ...state,
-                // commentError: null,
-                // comments: null
+                commentError: null
+            };
+
+        case 'CREATE_COMMENT_ERROR':
+            console.log('Create comment error', action.error.message);
+            return {
+                ...state,
+                commentError: action.error.message
             };
 
         default:

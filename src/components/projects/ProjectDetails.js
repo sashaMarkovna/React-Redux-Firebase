@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { firestoreConnect } from 'react-redux-firebase';
+import {firestoreConnect, isEmpty, isLoaded} from 'react-redux-firebase';
 import { Link, Redirect } from "react-router-dom";
-import { deleteProject } from "../../store/actions/projectActions";
+import {deleteProject, togglePostLike} from "../../store/actions/projectActions";
 import PreviewPicture from "../general/PreviewPicture";
 import { findDOMNode } from 'react-dom'
 import ReactTooltip from 'react-tooltip'
-import { deleteFile } from "../../store/actions/uploadActions";
-import Comments from "./Comments";
+import { deleteFile } from "../../store/actions/storageActions";
+import Comments from "./projectComments/Comments";
 import UserSignature from "../users/UserSignature";
-import {deleteAllComments} from "../../store/actions/commentsActions";
+import { deleteAllComments } from "../../store/actions/commentsActions";
+import Spinner from "../general/Spinner";
 
 
 class ProjectDetails extends Component {
@@ -23,12 +24,16 @@ class ProjectDetails extends Component {
         this.props.history.push('/');
     };
 
+    handleLike = () => {
+        this.props.togglePostLike(this.props.id, this.props.project.likes);
+    };
+
 
     render() {
         const { project, auth, id } = this.props;
 
         if (!auth.uid) return <Redirect to='/signin'/>;
-        if (project) {
+        if (isLoaded(project)) {
             return (
                 <div className="container section">
                     <div className="card z-depth-0 project-details">
@@ -63,21 +68,29 @@ class ProjectDetails extends Component {
                                     </div>) : null
                                 }
                             </div>
-                            <UserSignature authorProps={{ authorId: project.authorId, time: project.createdAt, componentClass: 'project-author' }}/>
-
+                            <div className="post__author-info">
+                                <UserSignature authorProps={{ userId: project.authorId, time: project.createdAt, componentClass: 'project-author' }}/>
+                            </div>
                             <div className="project-details__content">{ project.content.split('\n').map((item, key) => { return <span key={key}>{item}<br/></span> }) }</div>
+                            <div className="awesome" onClick={ this.handleLike }>
+                                <span className="awesome__count">{ project.likes }</span>
+                                <img className="awesome__link responsive-img" src="/img/awesome2.jpg" alt=""/>
+                            </div>
                         </div>
                         <Comments id={ id } uid={ auth.uid }/>
                     </div>
                 </div>
             )
-        } else {
+        } else if(isEmpty(project)){
             return (
                 <div className="container center">
-                    <p>Loading project...</p>
+                    <p>no project</p>
                 </div>
             );
-
+        } else {
+            return (
+                <Spinner/>
+            );
         }
     }
 }
@@ -97,7 +110,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         deleteProject: (projectId) => dispatch(deleteProject(projectId)),
         deleteFile: (fileUrl) => dispatch(deleteFile(fileUrl)),
-        deleteAllComments: (projectId) => dispatch(deleteAllComments(projectId))
+        deleteAllComments: (projectId) => dispatch(deleteAllComments(projectId)),
+        togglePostLike: (postId, postLikes) => dispatch(togglePostLike(postId, postLikes))
     }
 };
 

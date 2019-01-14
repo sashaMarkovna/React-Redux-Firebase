@@ -3,7 +3,7 @@ const initState = {
     uploadFileUrl: null
 };
 
-const uploadReducer = (state = initState, action) => {
+const storageReducer = (state = initState, action) => {
     switch (action.type) {
 
         case 'CLEAN_STATE_SUCCESS':
@@ -57,9 +57,30 @@ const uploadReducer = (state = initState, action) => {
                 uploadError: 'Delete file failed'
             };
 
+        case 'DELETE_AVATAR_SUCCESS':
+            console.log('Avatar has been deleted');
+            return {
+                ...state,
+                uploadError: null
+            };
+
+        case 'DELETE_AVATAR_ERROR':
+            console.log('Avatar Delete Error', action.error.message);
+            return {
+                ...state,
+                uploadError: 'Delete file failed'
+            };
+
+        case 'DEFAULT_USER_AVATAR':
+            console.log('Cannot delete default avatar');
+            return {
+                ...state,
+                uploadError: null
+            };
+
         default:
             return state;
     }
 };
 
-export default uploadReducer;
+export default storageReducer;

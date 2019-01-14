@@ -16,10 +16,18 @@ const authReducer = (state = initState, action) => {
     switch(action.type) {
 
         case 'CLEAR':
-            for(let key in initState) {initState[key] = null }
             return {
-                ...state
-                // [action.prop]: null
+                ...state,
+                authError: null,
+                authPasswordUpdateSuccessMessage: null,
+                authPasswordUpdateEmailError: null,
+                authPasswordUpdatePasswordError: null,
+                authEmailUpdateSuccessMessage: null,
+                authEmailUpdatePasswordError: null,
+                authEmailUpdateEmailError: null,
+                authDeleteAccountErrorMessage: null,
+                authDeleteUserAvatarError: null,
+                authDeleteUserBannerError: null
             };
 
         case 'LOGIN_SUCCESS':
@@ -143,6 +151,56 @@ const authReducer = (state = initState, action) => {
                 ...state,
                 authDeleteUserBannerError: action.error.message
             };
+
+        case 'USER_DATA_UPDATE_SUCCESS':
+            console.log('User data was succesfully updated', action.newData);
+            return {
+                ...state,
+                authError: null
+            };
+
+        case 'USER_DATA_UPDATE__ERROR':
+            console.log('User data update error', action.error.message);
+            return {
+                ...state,
+                authError: action.error.message
+            };
+
+        case 'UNFOLLOW_SUCCESS':
+            console.log('Unfollow success');
+            return {
+                ...state,
+                authError: null
+            };
+
+        case 'UNFOLLOW_ERROR':
+            console.log('Unfollow error', action.error.message);
+            return {
+                ...state,
+                authError: action.error.message
+            };
+
+        case 'FOLLOW_SUCCESS':
+            console.log('Follow success');
+            return {
+                ...state,
+                authError: null
+            };
+
+        case 'FOLLOW_ERROR':
+            console.log('Follow error', action.error.message);
+            return {
+                ...state,
+                authError: action.error.message
+            };
+
+        case 'TOGGLE_FOLLOW_ERROR':
+            console.log('Toggle Follow error', action.error.message);
+            return {
+                ...state,
+                authError: action.error.message
+            };
+
 
         default:
             return state;

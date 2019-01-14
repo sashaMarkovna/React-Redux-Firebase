@@ -60,7 +60,7 @@ class ChangeUserNameForm extends Component {
                     <button
                         onClick={ this.handleSubmit }
                         disabled={ this.state.buttonDisabled() }
-                        className="btn pink lighten-1 z-depth-0 ">
+                        className="btn pink lighten-1 z-depth-0">
                         Submit Changes
                     </button>
                 </div>

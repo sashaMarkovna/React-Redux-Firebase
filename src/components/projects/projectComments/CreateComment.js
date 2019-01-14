@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import UserSignature from "../users/UserSignature";
-import {createComment} from "../../store/actions/commentsActions";
+import UserSignature from "../../users/UserSignature";
+import { createComment } from "../../../store/actions/commentsActions";
 
 class CreateComment extends Component {
 
@@ -23,7 +23,7 @@ class CreateComment extends Component {
     render() {
         return (
             <div className="create-comment">
-                <UserSignature authorProps={{ authorId: this.props.uid, componentClass: 'comment' }} />
+                <UserSignature authorProps={{ userId: this.props.uid, componentClass: 'comment' }} />
                 <form onSubmit={this.handleSubmit} className="create-comment__form">
                     <div className="input-field">
                         <label htmlFor="content" className="create-comment__label" id="createCommentLabel">...what do you think?</label>
@@ -31,7 +31,6 @@ class CreateComment extends Component {
                             className="materialize-textarea create-comment__content"
                             id="content"
                             onChange={this.handleChange}
-                            // ref={c=>this.textarea=c}
                         />
                     </div>
                     <div className="input-field create-comment__btn-block">
@@ -43,8 +42,7 @@ class CreateComment extends Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    console.log('props = ', ownProps.id);
+const mapStateToProps = (state) => {
     return {
         uid: state.firebase.auth.uid
     }

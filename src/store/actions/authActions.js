@@ -40,6 +40,18 @@ export const updateUserName = (newName) => {
     }
 };
 
+export const updateUserData = (newData) => {
+    return (dispatch, getState, { getFirestore }) => {
+        const firestore = getFirestore();
+        const uid = getState().firebase.auth.uid;
+
+        firestore.collection('users').doc(uid).update({ ...newData })
+            .then(() => { dispatch({ type: 'USER_DATA_UPDATE_SUCCESS', newData })})
+            .catch((error) => { dispatch({ type: 'USER_DATA_UPDATE_ERROR', error })
+            });
+    }
+};
+
 export const signUp = (newUser) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         const firebase = getFirebase();
@@ -48,13 +60,12 @@ export const signUp = (newUser) => {
           femaleUserAvatar: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/avatars%2Fdefault-female.jpg?alt=media&token=0d8be347-7b0d-469f-8e2c-3b37ab9a07e2',
           maleUserAvatar: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/avatars%2Fdefault-male.jpg?alt=media&token=e7a72ca8-b8a3-413c-8bd3-5db88c249e74',
           unknownUserAvatar: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/avatars%2Fdefault-unknown.png?alt=media&token=0263a863-c71c-4ef5-a5ef-d016bedbdbd3',
-          defaultBanner: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/banners%2Fdefault-banner.jpg?alt=media&token=7800dafd-ccd2-4ed5-b341-08bb7270f8d0'
         };
-        let userPhoto = '';
+        let avatar = '';
 
-        if(newUser.gender === 'male') { userPhoto = userDefaultSettings.maleUserAvatar; }
-        else if(newUser.gender === 'female') { userPhoto = userDefaultSettings.femaleUserAvatar; }
-        else { userPhoto = userDefaultSettings.unknownUserAvatar; }
+        if(newUser.gender === 'male') { avatar = userDefaultSettings.maleUserAvatar; }
+        else if(newUser.gender === 'female') { avatar = userDefaultSettings.femaleUserAvatar; }
+        else { avatar = userDefaultSettings.unknownUserAvatar; }
 
         firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password)
             .then((response) => {
@@ -63,8 +74,7 @@ export const signUp = (newUser) => {
                     firstName: newUser.firstName,
                     lastName: newUser.lastName,
                     initials: newUser.firstName[0] + newUser.lastName[0],
-                    profileBanner: userDefaultSettings.defaultBanner,
-                    userPhoto
+                    avatar
                 });
             }).then(() => { dispatch({ type: 'SIGNUP_SUCCESS' })})
               .catch((error) => { dispatch({ type: 'SIGNUP_ERROR', error })});
@@ -108,21 +118,42 @@ export const deleteUserAccount = (password) => {
             femaleUserAvatar: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/avatars%2Fdefault-female.jpg?alt=media&token=0d8be347-7b0d-469f-8e2c-3b37ab9a07e2',
             maleUserAvatar: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/avatars%2Fdefault-male.jpg?alt=media&token=e7a72ca8-b8a3-413c-8bd3-5db88c249e74',
             unknownUserAvatar: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/avatars%2Fdefault-unknown.png?alt=media&token=0263a863-c71c-4ef5-a5ef-d016bedbdbd3',
-            defaultBanner: 'https://firebasestorage.googleapis.com/v0/b/todo-app-project-f55e9.appspot.com/o/banners%2Fdefault-banner.jpg?alt=media&token=7800dafd-ccd2-4ed5-b341-08bb7270f8d0'
         };
-        const userAvatar = profile.userPhoto !== userDefaultSettings.femaleUserAvatar &&
-                           profile.userPhoto !== userDefaultSettings.maleUserAvatar &&
-                           profile.userPhoto !== userDefaultSettings.unknownUserAvatar ?
-                           profile.userPhoto : null;
-        const userBanner = profile.profileBanner !== userDefaultSettings.defaultBanner ? profile.profileBanner : null;
+        const userAvatar = profile.avatar !== userDefaultSettings.femaleUserAvatar &&
+                           profile.avatar !== userDefaultSettings.maleUserAvatar &&
+                           profile.avatar !== userDefaultSettings.unknownUserAvatar ?
+                           profile.avatar : null;
 
         currentUser.reauthenticateAndRetrieveDataWithCredential(cred)
             .then(() => firestore.collection('users').doc(uid).delete()
                 .then(() => { if(userAvatar) storage.refFromURL(userAvatar).delete().catch((error) => dispatch({ type: 'DELETE_USER_AVATAR_ERROR', error })) })
-                .then(() => { if(userBanner) storage.refFromURL(userBanner).delete().catch((error) => dispatch({ type: 'DELETE_USER_BANNER_ERROR', error })) })
                 .then(() => currentUser.delete()
                     .then(() => dispatch({ type: 'DELETE_ACCOUNT_SUCCESS' })))
                 .catch((error) => dispatch({ type: 'DELETE_ACCOUNT_ERROR', error })))
             .catch((error) => dispatch({ type: 'DELETE_ACCOUNT_ERROR', error }));
+    }
+};
+
+export const toggleFollow = (userId) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firestore = getFirestore();
+        const uid = getState().firebase.auth.uid;
+        const follower = firestore.collection('users').doc(uid);
+        const followed = firestore.collection('users').doc(userId);
+
+        follower.get()
+            .then((snapshot) => {
+                if(snapshot.data().following[userId]) {
+                    follower.update({ [`following.${userId}`]: firestore.FieldValue.delete() })
+                        .then(() => followed.update({ [`followers.${uid}`]: firestore.FieldValue.delete()})
+                            .then(() => dispatch({ type: 'UNFOLLOW_SUCCESS' })))
+                        .catch((error) => dispatch({ type: 'UNFOLLOW_ERROR', error }))
+                } else {
+                    follower.update({ [`following.${userId}`]: true })
+                        .then(() => followed.update({ [`followers.${uid}`]: true })
+                            .then(() => dispatch({ type: 'FOLLOW_SUCCESS' })))
+                        .catch((error) => dispatch({ type: 'FOLLOW_ERROR', error }))
+                }
+            }).catch((error) => dispatch({ type: 'TOGGLE_FOLLOW_ERROR', error }))
     }
 };

@@ -5,7 +5,7 @@ import {compose} from "redux";
 import connect from "react-redux/es/connect/connect";
 import {firestoreConnect} from "react-redux-firebase";
 import { isLoaded, isEmpty } from 'react-redux-firebase';
-import Spinner from "../general/Spinner";
+import Spinner from "../../general/Spinner";
 
 const Comments = (props) => {
 
@@ -19,9 +19,10 @@ const Comments = (props) => {
                 !isLoaded(comments)
                 ? <Spinner/>
                 : isEmpty(comments) || !comments.length
-                ? (<p className="comments__no-comments">No talks yet, be first...</p>)
+                ? <p className="comments__no-comments">No talks yet, be first...</p>
                 : comments.map(comment => {
-                return ( <Comment id={ props.id } uid={ props.uid } comment={ comment } key={comment.id}/> )})
+                    return ( <Comment id={ props.id } uid={ props.uid } comment={ comment } key={comment.id}/> )
+                })
             }
         </div>
     )

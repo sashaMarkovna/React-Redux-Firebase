@@ -1,55 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
+import { firestoreConnect, isLoaded } from 'react-redux-firebase';
 import { compose } from 'redux';
-import { Link, Redirect} from 'react-router-dom';
+import { Redirect} from 'react-router-dom';
 import Spinner from "../general/Spinner";
-import Masonry from 'react-masonry-component';
-import ProjectSummary from "../projects/ProjectSummary";
+import PostsList from "../projects/PostsList";
 
 class Dashboard extends Component {
 
-
-
     render() {
-        const { projectsByData, auth } = this.props;
+        const { projects, auth } = this.props;
         if (!auth.uid) return <Redirect to='/signin'/>;
-        const masonryOptions = {
-            transitionDuration: 0
-        };
-
-        const imagesLoadedOptions = {
-            columnWidth: ".grid-item",
-            itemSelector: ".grid-item",
-            percentPosition: true,
-            gutter: 10,
-            fitWidth: true,
-        };
-
-
-
-    return (
+        return (
             <div className="dashboard container containerInfo">
-                { projectsByData && projectsByData.length ? (
-                    <Masonry
-                        className={'masonry'} // default ''
-                        elementType={'div'} // default 'div'
-                        options={masonryOptions} // default {}
-                        disableImagesLoaded={false} // default false
-                        updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
-                        imagesLoadedOptions={imagesLoadedOptions} // default {}
-                    >
-                        { projectsByData ? projectsByData.map(project => {
-                            return (
-                                <Link className="grid-item" to={ '/project/' + project.id } key={ project.id }>
-                                    <ProjectSummary project={ project } />
-                                </Link>
-                            )
-                        }) : null }
-                    </Masonry>
-
-                ) : <Spinner/> }
-
+                { isLoaded(projects) ? <PostsList projects={ projects }/> : <Spinner/> }
             </div>
         )
     }
@@ -57,7 +21,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        projectsByData: state.firestore.ordered.projects,
+        projects: state.firestore.ordered.projects,
         auth: state.firebase.auth,
     }
 };

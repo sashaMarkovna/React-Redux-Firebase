@@ -1,6 +1,7 @@
-html {
-  min-height: 100%;
-}
+@import 'styles/_general.scss';
+@import 'styles/_forms.scss';
+@import 'styles/posts/post-details';
+
 
 /*fonts*/
 /*font-family: 'Quicksand', sans-serif; */
@@ -14,42 +15,6 @@ html {
 /*font-family: 'Poiret One', cursive;*/
 
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-image: url("/img/beb86885727964a690027923a2714f3e.png");
-  background-size: cover;
-  min-height: 100%;
-    overflow-x: hidden;
-}
-
-code { font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
-
-/*================================================================TOOLTIPS===*/
-.delete-tooltip {
-    background-color: #ec407a !important;
-    font-weight: 600;
-    transition: .2s linear !important;
-}
-
-.delete-tooltip::after {
-    border-top-color: #ec407a !important
-}
-
-.edit-tooltip {
-    background-color: #26a69a !important;
-    font-weight: 600;
-    transition: .2s linear !important;
-}
-
-.edit-tooltip::after {
-    border-top-color: #26a69a !important
-}
 
 /*================================================================MASONRY===*/
 .masonry {
@@ -64,25 +29,6 @@ code { font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", mon
 .grid {
     margin: 0 auto;
 }
-
-
-/*================================================================FORMS===*/
-form {
-    padding: 20px;
-    margin-top: 60px;
-    box-sizing: border-box;
-    border-radius: 10px;
-    max-width: 600px;
-    font-family: 'Poiret One', cursive;
-    font-weight: 900;
-    letter-spacing: 1px;
-}
-
-form button, form h5 { margin: 20px 0; }
-
-form h5 { font-weight: 900; }
-
-form button { font-family: 'Righteous', cursive; }
 
 .form__radio-block {
     display: flex;
@@ -557,66 +503,7 @@ form button { font-family: 'Righteous', cursive; }
 }
 
 /*================================================================PROJECTS===*/
-/*--------------------------PROJECT-DETAILS------->*/
-.project-details {
-    box-shadow: 24px 18px 2px 0 rgba(0,0,0,0.7) !important;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto; }
 
-.project-details__main {
-    font-family: 'Poiret One', cursive;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    font-size: 18px;
-    padding-bottom: 0 !important;
-    line-height: 30px; }
-
-.project-details__title {
-    font-family: 'Staatliches', cursive;
-    margin: 0 !important; }
-
-.edit-post-links {
-    font-size: 20px;
-    display: flex;
-    color: #9e9e9e;
-}
-
-.project-details__author-block {
-    display: flex;
-    justify-content: space-between; }
-
-.delete-post {
-    margin-left: 10px;
-    margin-right: 10px; }
-
-.edit-post-links div>i {
-    cursor: pointer;
-    transition: .2s linear; }
-
-.edit-post-links div>i:hover,
-.edit-post__editLink>i:hover {
-    transform: scale(1.4) !important; }
-
-.edit-post-links div>.fa-trash-alt:hover { color: #ec407a; }
-
-.edit-post__editLink>i {
-    color: #9e9e9e;
-    height: max-content;
-    transition: .2s linear }
-
-.edit-post__editLink>i:hover { color: #26a69a; }
-
-.project-details__edit-post {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 30px 0 10px 0;
-}
-
-.project-details__content {
-    margin-top: 30px;
-}
 /*--------------------------CREATE-PROJECT------->*/
 .create-project {
     margin-left: auto;

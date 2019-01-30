@@ -6,6 +6,7 @@
     "autosize": "^4.0.2",
     "firebase": "^5.6.0",
     "moment": "^2.22.2",
+    "node-sass": "^4.11.0",
     "react": "^16.6.3",
     "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.6.3",
@@ -17,13 +18,17 @@
     "react-tooltip": "^3.9.0",
     "redux": "^4.0.1",
     "redux-firestore": "^0.6.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "react-redux-firebase": "^2.2.6",
+    "redux-devtools-extension": "^2.13.7",
+    "react-router-dom": "^4.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ./src"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,8 +40,14 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "react-redux-firebase": "^2.2.4",
-    "react-router-dom": "^4.3.1",
-    "redux-devtools-extension": "^2.13.7"
+    "babel-cli": "6.18.0",
+    "babel-core": "6.20.0",
+    "babel-eslint": "9.0.0",
+    "eslint": "5.6.0",
+    "eslint-config-airbnb": "14.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.9.0",
+    "eslint-watch": "2.1.14"
   }
 }
